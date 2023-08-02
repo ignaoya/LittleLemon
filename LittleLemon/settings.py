@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,17 +80,24 @@ WSGI_APPLICATION = 'LittleLemon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'littlelemondb2',
-        # 'USER': 'lemon',
-        # 'PASSWORD': 'abretesesamo',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '3306',
-        # 'OPTIONS': {
-        #      'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        #     }
+        'USER': 'lemon',
+        'PASSWORD': 'abretesesamo',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test.db'
     }
 }
+
+if 'test' in sys.argv:
+    DATABASES['default'] = DATABASES['test']
 
 
 # Password validation

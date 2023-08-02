@@ -29,7 +29,7 @@ class MenuViewTest(TestCase):
 
     def setUp(self):
         Menu.objects.create(title='Helado', price=80, inventory=100)
-        client.credentials()
+        # client.credentials()
 
     def test_get_all(self):
         response = client.get(reverse('menu-view'))
